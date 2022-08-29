@@ -1,0 +1,1 @@
+module.exports = (b, a) => (require("cypress-fail-fast/plugin")(b, a), a)

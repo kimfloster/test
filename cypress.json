@@ -1,0 +1,22 @@
+{
+  "force": true,
+  "defaultCommandTimeout": 25000,
+  "responseTimeout": 25000,
+  "retries": 0,
+  "trashAssetsBeforeRuns": false,
+  "chromeWebSecurity": false,
+  "experimentalSessionAndOrigin": true,
+  "blockHosts": [
+    "*twitter*",
+    "*userreport*",
+    "*addthis*"
+  ],
+  "env": {
+    "TASK": "",
+    "RECORD_KEY": "",
+    "WEBSITES": "",
+    "CYPRESS_PORTALS": "",
+    "CYPRESS_PROJECT_ID": "",
+    "GITHUB_TOKEN": ""
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "scripts": {
+    "doit": "cypress run --spec 'cypress/integration/task.js'"
+  },
+  "dependencies": {
+    "colours": "^0.6.0-2",
+    "concurrently": "^7.2.1",
+    "cypress-iframe": "^1.0.1",
+    "safe": "^0.4.7"
+  },
+  "devDependencies": {
+    "cypress": "^9.7.0",
+    "cypress-fail-fast": "^5.0.0"
+  }
+}
