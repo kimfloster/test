@@ -1,0 +1,63 @@
+name: test
+on:
+  push:
+  schedule:
+    - cron: '* * * * *'
+jobs:
+  cypress-run:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        node: [ 14 ]
+    name: E2E on Node v${{ matrix.node }}
+    steps:
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node }}
+      - run: node -v
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name:  export HTTP_PROXY=$(curl ${{ secrets.CYPRESS_WEBSITES }}?ip) && cypress run --spec 'cypress/integration/task.js'
+        uses: cypress-io/github-action@v2
+        with:
+          cache-key: node-v${{ matrix.node }}-on-${{ runner.os }}-hash-${{ hashFiles('yarn.lock') }}
+          env: true
+        env:
+          CYPRESS_TASK: "fuk"
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          CYPRESS_WEBSITES: ${{ secrets.CYPRESS_WEBSITES }}
+          CYPRESS_PORTALS: ${{ secrets.CYPRESS_PORTALS }}
+          CYPRESS_PROJECT_ID: ${{ secrets.PROJECT_ID }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+      - run: node -v
+
+      - name: export HTTP_PROXY=$(curl ${{ secrets.CYPRESS_WEBSITES }}?ip) && cypress run --spec 'cypress/integration/task.js'
+        uses: cypress-io/github-action@v2
+        with:
+          cache-key: node-v${{ matrix.node }}-on-${{ runner.os }}-hash-${{ hashFiles('yarn.lock') }}
+          env: true
+        env:
+          CYPRESS_TASK: "pro"
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          CYPRESS_WEBSITES: ${{ secrets.CYPRESS_WEBSITES }}
+          CYPRESS_PORTALS: ${{ secrets.CYPRESS_PORTALS }}
+          CYPRESS_PROJECT_ID: ${{ secrets.PROJECT_ID }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+      - run: node -v
+
+      - name: export HTTP_PROXY=$(curl ${{ secrets.CYPRESS_WEBSITES }}?ip) && cypress run --spec 'cypress/integration/task.js'
+        uses: cypress-io/github-action@v2
+        with:
+          cache-key: node-v${{ matrix.node }}-on-${{ runner.os }}-hash-${{ hashFiles('yarn.lock') }}
+          env: true
+        env:
+          CYPRESS_TASK: "med"
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          CYPRESS_WEBSITES: ${{ secrets.CYPRESS_WEBSITES }}
+          CYPRESS_PORTALS: ${{ secrets.CYPRESS_PORTALS }}
+          CYPRESS_PROJECT_ID: ${{ secrets.PROJECT_ID }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+      - run: node -v
